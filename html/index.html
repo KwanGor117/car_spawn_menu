@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Model Input</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="display:none">
+    <div class="container">
+        <div class="close-button">
+            <a href="#" id="close-button">
+                <span class="left">
+                    <span class="circle-left"></span>
+                    <span class="circle-right"></span>
+                </span>
+                <span class="right">
+                    <span class="circle-left"></span>
+                    <span class="circle-right"></span>
+                </span>
+            </a>
+        </div>
+        <label for="car-model">Enter Car Model:</label>
+        <input type="text" id="car-model" name="car-model" placeholder="Enter car model in English">
+        <button id="enter-button">Enter</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Listen for messages from Lua
+            window.addEventListener('message', function(event) {
+                if (event.data.type === 'open') {
+                    document.body.style.display = 'block';
+                }
+                if (event.data.type === 'close') {
+                    document.body.style.display = 'none';
+                }
+            });
+
+            document.getElementById('enter-button').addEventListener('click', function() {
+                const carModel = document.getElementById('car-model').value;
+                fetch(`https://car_spawn_menu/spawnCar`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ model: carModel })
+                }).then(() => {
+                    document.body.style.display = 'none';
+                    fetch(`https://car_spawn_menu/closeMenu`, {
+                        method: 'POST'
+                    });
+                });
+            });
+
+            document.getElementById('close-button').addEventListener('click', function() {
+                fetch(`https://car_spawn_menu/closeMenu`, {
+                    method: 'POST'
+                });
+                document.body.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
