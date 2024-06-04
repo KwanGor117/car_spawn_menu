@@ -37,15 +37,12 @@ AddEventHandler('car_spawn_menu:openMenu', function()
     SendNUIMessage({ type = 'open' })  -- Open the NUI from the Lua side
 end)
 
---[[
-    -- Listen for the Home key press
-    Citizen.CreateThread(function()
-        while true do
-            Citizen.Wait(0) -- Run this code every frame
-            if IsControlJustReleased(1, 213) then -- 213 is the control ID for the Home key
-                TriggerServerEvent('car_spawn_menu:keyPress')
-            end
+-- Listen for the Home key press
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0) -- Run this code every frame
+        if IsControlJustReleased(1, 213) then -- 213 is the control ID for the Home key
+            TriggerServerEvent('car_spawn_menu:keyPress')
         end
-    end)
-]]
-
+    end
+end)
