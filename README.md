@@ -1,6 +1,8 @@
-# car_spawn_menu
+# car_spawn_menu For Fivem
 
-For ESX, simple spawn car menu
+Commmand: /opencarmenu
+
+Using ESX, simple spawn car menu
 
 This script provides a user-friendly menu for FiveM servers, allowing administrators to spawn vehicles by entering the vehicle model name. 
 
